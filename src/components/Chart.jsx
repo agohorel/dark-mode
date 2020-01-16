@@ -33,11 +33,9 @@ const Chart = ({ sparklineData, darkMode }) => {
     ? { backgroundColor: "#3c3c3c" }
     : { backgroundColor: "#eee" };
 
-  console.log(tooltipStyles);
-
   return (
     <LineChart width={1100} height={300} data={formattedData}>
-      <Line type="monotone" dataKey="value" stroke={strokeColor} />
+      <Line type="natural" dataKey="value" stroke={strokeColor}/>
       <CartesianGrid stroke={gridColor} strokeDasharray="5 5" />
       <XAxis dataKey="date" interval={3} />
       <YAxis />
