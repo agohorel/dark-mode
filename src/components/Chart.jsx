@@ -9,7 +9,7 @@ import {
   Tooltip
 } from "recharts";
 
-const Chart = ({ sparklineData }) => {
+const Chart = ({ sparklineData, darkMode }) => {
   const formattedData = sparklineData
     .map((price, idx) => {
       if (idx % 6 === 0) {
@@ -26,13 +26,20 @@ const Chart = ({ sparklineData }) => {
     })
     .filter(data => data);
 
+  const strokeColor = darkMode ? "#fff" : "#8884d8";
+  const gridColor = darkMode ? "#aaa" : "#ccc";
+  const tooltipStyles = darkMode ? { color: "white" } : { color: "black" };
+  const tooltipContentStyles = darkMode
+    ? { backgroundColor: "#3c3c3c" }
+    : { backgroundColor: "#eee" };
+
   return (
     <LineChart width={1100} height={300} data={formattedData}>
-      <Line type="monotone" dataKey="value" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+      <Line type="natural" dataKey="value" stroke={strokeColor}/>
+      <CartesianGrid stroke={gridColor} strokeDasharray="5 5" />
       <XAxis dataKey="date" interval={3} />
       <YAxis />
-      <Tooltip />
+      <Tooltip itemStyle={tooltipStyles} contentStyle={tooltipContentStyles} />
     </LineChart>
   );
 };
